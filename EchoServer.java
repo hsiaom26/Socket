@@ -55,11 +55,9 @@ public class EchoServer {
 		/* Exception handeling. */
 		catch (IOException e) {
 			System.err.println("I/O error: " + e.getMessage());
-			e.printStackTrace();
 		}
 		catch (Exception e) {
 			System.err.println("Server error: " + e.getMessage());
-			e.printStackTrace();
 		} 
 		finally {
 			System.out.println("Server is closing...");
