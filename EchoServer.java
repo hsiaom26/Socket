@@ -48,7 +48,7 @@ public class EchoServer {
 				/* The second parameter of PrintWriter is 'autoFlush'. */
 				PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 				/* Now, we send some string back to the client via the socket. */
-				ouy.println(str);
+				out.println(str);
 				System.out.println("Server echoed back to client " + clientSocket.getInetAddress().getHostAddress() + ": " + str);
 			}
 		} 
