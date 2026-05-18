@@ -76,6 +76,7 @@ public class MultithreadServer {
                         socket.close();
                     }
                 } catch (IOException e) {
+                    // Error Handling
                     System.err.println("Error closing resources: " + e.getMessage());
                 }
             }
