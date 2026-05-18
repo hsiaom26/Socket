@@ -7,7 +7,6 @@ import java.net.*;
  */
 public class MultithreadServer {
     private static final int PORT = 5000;
-    private static final int BUFFER_SIZE = 1024;
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
@@ -27,7 +26,6 @@ public class MultithreadServer {
             }
         } catch (IOException e) {
             System.err.println("Server error: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 

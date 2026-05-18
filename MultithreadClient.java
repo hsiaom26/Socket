@@ -22,18 +22,11 @@ public class MultithreadClient {
             BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
 
             // Create a separate thread to read responses from server
-            Thread responseThread = new Thread(() -> {
-                try {
-                    String response;
-                    while ((response = serverReader.readLine()) != null) {
-                        System.out.println("Echo from server: " + response);
-                    }
-                    System.out.println("\nServer closed the connection.");
-                } catch (IOException e) {
-                    System.err.println("Error reading from server: " + e.getMessage());
-                }
-            });
-            /* Non-lambda version:
+            // Three different ways to implement the response reader thread are shown below,
+            // you can choose one of them by uncommenting it and commenting out the others.
+
+            // 1. method reference version of response reader thread
+            /*
             private static class ResponseReader implements Runnable {
                 private BufferedReader serverReader;
 
@@ -56,8 +49,9 @@ public class MultithreadClient {
             }
             Thread responseThread = new Thread(new ResponseReader(serverReader));
             */
-           /* 
-            // Alternative using anonymous inner class:
+
+            // 2. anonymous inner class version
+            /* 
             Thread responseThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -72,8 +66,23 @@ public class MultithreadClient {
                     }
                 }
             });
-           */
+            */
 
+            // 3. lambda version of response reader thread
+            
+            Thread responseThread = new Thread(() -> {
+                try {
+                    String response;
+                    while ((response = serverReader.readLine()) != null) {
+                        System.out.println("Echo from server: " + response);
+                    }
+                    System.out.println("\nServer closed the connection.");
+                } catch (IOException e) {
+                    System.err.println("Error reading from server: " + e.getMessage());
+                }
+            });
+            
+            
             // Set as daemon so it will exit when main thread exits
             // If the server closes the connection, this thread will also exit.
             // Otherswise, it will keep running until the user types 'quit' in the main thread.
@@ -99,7 +108,6 @@ public class MultithreadClient {
             System.err.println("Make sure the server is running.");
         } catch (IOException e) {
             System.err.println("Client error: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }
