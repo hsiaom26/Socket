@@ -68,6 +68,7 @@ public class MultithreadServer {
                 System.err.println("Client handler error: " + e.getMessage());
             } finally {
                 try {
+                    // close resources
                     if (reader != null) reader.close();
                     if (writer != null) writer.close();
                     if (socket != null && !socket.isClosed()) {
