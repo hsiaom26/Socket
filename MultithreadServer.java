@@ -6,7 +6,7 @@ import java.net.*;
  * Accepts multiple client connections and echoes back their messages
  */
 public class MultithreadServer {
-    private static final int PORT = 8000;
+    private static final int PORT = 5000;
 
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
